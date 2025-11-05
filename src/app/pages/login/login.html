@@ -1,0 +1,84 @@
+<div class="bg-[#111418] min-h-screen flex items-center justify-center font-sans p-4">
+  <div class="bg-[#1c1f24] rounded-2xl shadow-lg flex flex-col md:flex-row w-full max-w-4xl overflow-hidden">
+
+    <!-- Imagen (arriba en móvil, a la derecha en escritorio) -->
+    <div class="flex flex-col items-center justify-center bg-[#22262c] p-6 md:w-1/2">
+      <img src="https://i.ibb.co/xtzf7Vc2/logo.png" alt="LogoPi"
+        class="max-w-[60%] md:max-w-[80%] object-contain mb-2 md:mb-4" />
+      <p class="text-white text-2xl md:text-3xl font-semibold text-center">Sentinel Pi</p>
+    </div>
+
+    <!-- Formulario -->
+    <div class="flex-1 p-6 md:p-12 flex flex-col justify-center">
+      <h2 class="text-2xl md:text-3xl font-bold text-white mb-2">Iniciar Sesión</h2>
+      <p class="text-[#9dabb8] mb-6 text-sm md:text-base">Inicia sesión en tu cuenta para continuar</p>
+
+      <form class="space-y-4" (submit)="onSubmit($event)">
+  <input
+    type="email"
+    placeholder="Email"
+    name="email"
+    [(ngModel)]="email"
+    required
+    class="w-full h-12 rounded-xl bg-[#293038] text-white px-4 placeholder-[#9dabb8] focus:outline-none focus:ring-2 focus:ring-[#4296ea]"
+  />
+
+  <input
+    type="password"
+    placeholder="Password"
+    name="password"
+    [(ngModel)]="password"
+    required
+    class="w-full h-12 rounded-xl bg-[#293038] text-white px-4 placeholder-[#9dabb8] focus:outline-none focus:ring-2 focus:ring-[#4296ea]"
+  />
+
+  <button
+    type="submit"
+    class="w-full h-12 rounded-full bg-[#4296ea] text-white font-bold hover:bg-[#357dc6] transition"
+  >
+    Iniciar sesión
+  </button>
+
+  <p *ngIf="errorMessage" class="text-red-500 text-center mt-2 text-sm">
+    {{ errorMessage }}
+  </p>
+
+  <p *ngIf="loading" class="text-[#9dabb8] text-center mt-2 text-sm">
+    Iniciando sesión...
+  </p>
+
+  <button
+    type="button"
+    class="w-full h-12 rounded-full bg-[#293038] text-white font-bold hover:bg-[#3b424b] transition flex items-center justify-center gap-2"
+  >
+    <svg class="w-5 h-5" viewBox="0 0 48 48">
+      <path
+        fill="#4285F4"
+        d="M24 9.5c3.3 0 6.1 1.1 8.3 3.1l6.2-6.2C34.4 2.4 29.6 0 24 0 14.6 0 6.6 5.8 2.8 14.2l7.2 5.6C12.2 13.1 17.6 9.5 24 9.5z"
+      />
+      <path
+        fill="#34A853"
+        d="M46.1 24.5c0-1.5-.1-2.9-.4-4.3H24v8.1h12.4c-.6 3.3-2.6 6.1-5.6 8l8.6 6.7c5-4.6 7.9-11.3 7.9-18.5z"
+      />
+      <path
+        fill="#FBBC05"
+        d="M10 28.1c-1.3-3.8-1.3-7.9 0-11.7l-7.2-5.6C-1.3 16.3-1.3 31.7 2.8 39.1l7.2-5.6z"
+      />
+      <path
+        fill="#EA4335"
+        d="M24 48c6.5 0 12.1-2.1 16.1-5.7l-8.6-6.7c-2.4 1.6-5.4 2.5-8.6 2.5-6.4 0-11.8-3.6-14.4-8.8l-7.2 5.6C6.6 42.2 14.6 48 24 48z"
+      />
+    </svg>
+    Inicia sesión con Google
+  </button>
+</form>
+
+
+
+      <p class="text-[#9dabb8] text-sm text-center mt-4">
+        ¿Olvidaste tu contraseña?
+        <a href="/recovery-password" class="underline hover:text-white">Recupérala ahora.</a>
+      </p>
+    </div>
+  </div>
+</div>

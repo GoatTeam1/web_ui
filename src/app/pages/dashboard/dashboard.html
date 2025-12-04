@@ -111,49 +111,25 @@
         </div>
 
         <!-- Flujo de ataques en vivo -->
-        <div class="cyber-card animate-fadeInUp" style="animation-delay: .45s">
-          <h3 class="text-lg font-semibold mb-4">Flujo de Ataques en Vivo</h3>
-          <div class="max-h-96 overflow-y-auto space-y-3 pr-2">
-            <div class="flex items-start space-x-3 p-3 bg-gray-700/50 rounded-md animate-fadeInUp"
-              style="animation-delay: .5s">
-              <span class="material-icons cyber-danger mt-1">local_fire_department</span>
-              <div>
-                <p class="font-medium text-sm">Intento de Fuerza Bruta</p>
-                <p class="text-xs cyber-text-secondary">IP: 192.168.1.100 | Objetivo: Servidor Alfa</p>
-              </div>
+        <div class="cyber-card">
+          <h3 class="text-lg font-semibold mb-4">Reportes Mensuales</h3>
+
+          <div class="flex flex-col space-y-3">
+
+            <div class="flex space-x-3">
+              <select [(ngModel)]="mes" class="bg-gray-700 p-2 rounded-md flex-1">
+                <option *ngFor="let m of [1,2,3,4,5,6,7,8,9,10,11,12]" [value]="m">
+                  {{ m }}
+                </option>
+              </select>
+
+              <input type="number" [(ngModel)]="year" class="bg-gray-700 p-2 rounded-md w-24" />
             </div>
-            <div class="flex items-start space-x-3 p-3 bg-gray-700/50 rounded-md animate-fadeInUp"
-              style="animation-delay: .55s">
-              <span class="material-icons cyber-accent mt-1">shield</span>
-              <div>
-                <p class="font-medium text-sm">Ataque Bloqueado</p>
-                <p class="text-xs cyber-text-secondary">IP: 203.0.113.45 | Regla: Filtro XSS</p>
-              </div>
-            </div>
-            <div class="flex items-start space-x-3 p-3 bg-gray-700/50 rounded-md animate-fadeInUp"
-              style="animation-delay: .6s">
-              <span class="material-icons cyber-danger mt-1">bug_report</span>
-              <div>
-                <p class="font-medium text-sm">Malware Detectado</p>
-                <p class="text-xs cyber-text-secondary">Archivo: update.exe | Host: Estación_03</p>
-              </div>
-            </div>
-            <div class="flex items-start space-x-3 p-3 bg-gray-700/50 rounded-md animate-fadeInUp"
-              style="animation-delay: .65s">
-              <span class="material-icons text-yellow-400 mt-1">warning_amber</span>
-              <div>
-                <p class="font-medium text-sm">Inicio de Sesión Sospechoso</p>
-                <p class="text-xs cyber-text-secondary">Usuario: j.doe | Ubicación: Desconocida</p>
-              </div>
-            </div>
-            <div class="flex items-start space-x-3 p-3 bg-gray-700/50 rounded-md animate-fadeInUp"
-              style="animation-delay: .7s">
-              <span class="material-icons cyber-accent mt-1">shield</span>
-              <div>
-                <p class="font-medium text-sm">Ataque Bloqueado</p>
-                <p class="text-xs cyber-text-secondary">IP: 172.16.0.5 | Regla: SQLi_Guard</p>
-              </div>
-            </div>
+
+            <button class="bg-blue-600 hover:bg-blue-500 transition-colors p-2 rounded-md" (click)="downloadReport()">
+              Descargar reporte
+            </button>
+
           </div>
         </div>
 
@@ -180,42 +156,38 @@
           </div>
         </div>
 
-        <!-- IPs Capturadas -->
+        
         <div class="cyber-card animate-fadeInUp" style="animation-delay: .65s">
           <h3 class="text-lg font-semibold mb-4">IPs Capturadas</h3>
-          <div class="space-y-2 max-h-64 overflow-y-auto">
-            <div class="flex justify-between items-center p-2 bg-gray-700 rounded-md animate-fadeInUp"
-              style="animation-delay: .7s">
-              <span class="text-sm">192.168.1.45</span>
-              <span class="cyber-accent text-xs">Activa</span>
-            </div>
-            <div class="flex justify-between items-center p-2 bg-gray-700 rounded-md animate-fadeInUp"
-              style="animation-delay: .75s">
-              <span class="text-sm">10.0.0.23</span>
-              <span class="cyber-danger text-xs">Bloqueada</span>
-            </div>
-            <div class="flex justify-between items-center p-2 bg-gray-700 rounded-md animate-fadeInUp"
-              style="animation-delay: .8s">
-              <span class="text-sm">172.16.5.8</span>
-              <span class="cyber-accent text-xs">Activa</span>
-            </div>
-            <div class="flex justify-between items-center p-2 bg-gray-700 rounded-md animate-fadeInUp"
-              style="animation-delay: .85s">
-              <span class="text-sm">203.0.113.101</span>
-              <span class="cyber-danger text-xs">Bloqueada</span>
-            </div>
-            <div class="flex justify-between items-center p-2 bg-gray-700 rounded-md animate-fadeInUp"
-              style="animation-delay: .9s">
-              <span class="text-sm">198.51.100.76</span>
-              <span class="cyber-accent text-xs">Activa</span>
+
+          <div *ngIf="loadingIPs" class="text-sm cyber-text-secondary">Cargando...</div>
+          <p *ngIf="errorIPs" class="text-red-400 text-sm">{{ errorIPs }}</p>
+
+          <div *ngIf="!loadingIPs" class="space-y-2 max-h-64 overflow-y-auto">
+            <div *ngFor="let ip of ips; let i = index"
+              class="flex justify-between items-center p-2 bg-gray-700 rounded-md animate-fadeInUp"
+              [style.animation-delay]="(0.7 + i * 0.05) + 's'">
+              <span class="text-sm">{{ ip.ip }}</span>
+
+              <span class="text-xs" [ngClass]="{
+          'cyber-accent': ip.estado === 'Activa',
+          'cyber-danger': ip.estado === 'Bloqueada'
+        }">
+                {{ ip.estado }}
+              </span>
             </div>
           </div>
+
           <div class="mt-4 border-t border-gray-600 pt-3 flex justify-between items-center animate-fadeIn"
             style="animation-delay: .95s">
             <p class="text-sm cyber-text-secondary">Número total de ataques detectados:</p>
-            <p class="text-lg font-bold cyber-accent">435</p>
+            <p class="text-lg font-bold cyber-accent">{{ ips.length }}</p>
           </div>
         </div>
+
+
+
+
       </aside>
     </main>
 

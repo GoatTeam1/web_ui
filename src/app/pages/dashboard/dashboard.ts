@@ -11,5 +11,9 @@ import { AlertsIntensityChart } from '../../components/alerts-intensity-chart/al
 })
 export class Dashboard {
 
+  logout() {
+    localStorage.removeItem('token');
+    window.location.href = '/sign-in';
+  }
 }
 

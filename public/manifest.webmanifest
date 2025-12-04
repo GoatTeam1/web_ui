@@ -1,6 +1,6 @@
 {
-  "name": "app-front",
-  "short_name": "app-front",
+  "name": "Sentinel-Pi App",
+  "short_name": "Sentinel-Pi",
   "display": "standalone",
   "scope": "./",
   "start_url": "./",
@@ -12,7 +12,7 @@
       "purpose": "maskable any"
     },
     {
-      "src": "icons/icon-96x96.png",
+      "src": "icons/favicon-96x96.png",
       "sizes": "96x96",
       "type": "image/png",
       "purpose": "maskable any"
@@ -36,7 +36,7 @@
       "purpose": "maskable any"
     },
     {
-      "src": "icons/icon-192x192.png",
+      "src": "icons/web-app-manifest-192x192.png",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "maskable any"
@@ -48,7 +48,7 @@
       "purpose": "maskable any"
     },
     {
-      "src": "icons/icon-512x512.png",
+      "src": "icons/web-app-manifest-512x512.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "maskable any"

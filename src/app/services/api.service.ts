@@ -8,7 +8,7 @@ import { map, catchError } from "rxjs/operators";
 })
 export class ApiService {
 
-    private baseUrl = 'https://shared-peacock-goat-team-86189809.koyeb.app/api';
+    private baseUrl = 'https://actual-clementia-goat-team2-5c68b199.koyeb.app/api';
 
     constructor(private http: HttpClient) { }
 
